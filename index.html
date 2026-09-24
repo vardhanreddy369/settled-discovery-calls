@@ -4,250 +4,289 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Book a 15 minute customer discovery call with the Settled team, UCF EGN 4641C. No demo and no sales follow up.">
-<meta name="theme-color" content="#1A73E8" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#1B1B1B" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)">
 <meta property="og:title" content="15 minutes on how your events actually run">
 <meta property="og:description" content="Five UCF engineering students researching how people who run events keep budgets and payments on track. Nothing to sell.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231A73E8'/%3E%3Ctext x='16' y='22' font-family='Roboto,sans-serif' font-size='15' fill='white' text-anchor='middle'%3E24%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A0A0A'/%3E%3Ctext x='16' y='22' font-family='Inter,sans-serif' font-weight='700' font-size='14' fill='%23FAFAFA' text-anchor='middle'%3E15%3C/text%3E%3C/svg%3E">
 <title>Settled Discovery Calls</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap">
+<link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
 
 <style>
-  /* Google's own palette, so the page sits beside Calendar without arguing. */
+  /* Medha's tokens, lifted verbatim from her mockup. */
   :root {
-    --ground:    #FFFFFF;
-    --surface:   #FFFFFF;
-    --sunk:      #F1F3F4;
-    --ink:       #202124;
-    --body-c:    #3C4043;
-    --muted:     #5F6368;
-    --hair:      #DADCE0;
-    --hair-soft: #E8EAED;
-    --blue:      #1A73E8;
-    --blue-soft: #E8F0FE;
-    --blue-ink:  #174EA6;
-    --basil:     #0B8043;
+    --bg-page:   #FFFFFF;
+    --bg-card:   #FAFAFA;
+    --bg-muted:  #F0F0F0;
+    --text-1:    #0A0A0A;
+    --text-2:    #242424;
+    --text-3:    #666666;
+    --rule:      #D9D9D9;
+    --rule-soft: #F0F0F0;
+    --btn-bg:    #0A0A0A;
+    --btn-fg:    #FAFAFA;
+    --btn-bg-hover: #000000;
+    --slot-bg:   #FFFFFF;
+    --band-bg:   #0A0A0A;
+    --band-fg:   #FAFAFA;
+    --band-2:    #C4C4C4;
+    --band-3:    #8A8A8A;
+    --band-rule: #242424;
+    --band-tile: #1C1C1C;
+    --note-bg:   #FFF7D6;
+    --note-fg:   #3D3200;
+    --note-rule: #E8D98A;
 
-    --display: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --body:    "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
-    --mono:    "Roboto Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --font-sans: 'Satoshi', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-num:  'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+    --radius:    10px;
+    --gutter:    clamp(16px, 4vw, 48px);
+    --max:       1240px;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
-      --ground:    #1B1B1B;
-      --surface:   #2D2E30;
-      --sunk:      #3C4043;
-      --ink:       #E8EAED;
-      --body-c:    #BDC1C6;
-      --muted:     #9AA0A6;
-      --hair:      #5F6368;
-      --hair-soft: #3C4043;
-      --blue:      #8AB4F8;
-      --blue-soft: #1F3047;
-      --blue-ink:  #AECBFA;
-      --basil:     #81C995;
-
+      --bg-page:   #0A0A0A;
+      --bg-card:   #121212;
+      --bg-muted:  #1C1C1C;
+      --text-1:    #FAFAFA;
+      --text-2:    #C4C4C4;
+      --text-3:    #8A8A8A;
+      --rule:      #242424;
+      --rule-soft: #171717;
+      --btn-bg:    #FAFAFA;
+      --btn-fg:    #0A0A0A;
+      --btn-bg-hover: #FFFFFF;
+      --slot-bg:   #0A0A0A;
+      --band-bg:   #121212;
+      --band-rule: #242424;
+      --band-tile: #1C1C1C;
+      --note-bg:   #2A2410;
+      --note-fg:   #F2E6B0;
+      --note-rule: #4A4020;
     }
   }
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --ground:    #1B1B1B;
-    --surface:   #2D2E30;
-    --sunk:      #3C4043;
-    --ink:       #E8EAED;
-    --body-c:    #BDC1C6;
-    --muted:     #9AA0A6;
-    --hair:      #5F6368;
-    --hair-soft: #3C4043;
-    --blue:      #8AB4F8;
-    --blue-soft: #1F3047;
-    --blue-ink:  #AECBFA;
-    --basil:     #81C995;
-
+    --bg-page:   #0A0A0A;
+    --bg-card:   #121212;
+    --bg-muted:  #1C1C1C;
+    --text-1:    #FAFAFA;
+    --text-2:    #C4C4C4;
+    --text-3:    #8A8A8A;
+    --rule:      #242424;
+    --rule-soft: #171717;
+    --btn-bg:    #FAFAFA;
+    --btn-fg:    #0A0A0A;
+    --btn-bg-hover: #FFFFFF;
+    --slot-bg:   #0A0A0A;
+    --band-bg:   #121212;
+    --band-rule: #242424;
+    --band-tile: #1C1C1C;
+    --note-bg:   #2A2410;
+    --note-fg:   #F2E6B0;
+    --note-rule: #4A4020;
   }
 
   html { -webkit-text-size-adjust: 100%; }
-  :root { padding-top: env(safe-area-inset-top, 0px);
-          padding-bottom: env(safe-area-inset-bottom, 0px); }
+  * { box-sizing: border-box; }
   img { max-width: 100%; }
   [hidden] { display: none !important; }
-  * { box-sizing: border-box; }
 
   body {
     margin: 0;
-    background: var(--ground);
-    color: var(--body-c);
-    font: 400 16px/1.6 var(--body);
+    background: var(--bg-page);
+    color: var(--text-1);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.55;
+    letter-spacing: -0.02em;
+    font-weight: 450;
     -webkit-font-smoothing: antialiased;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
-  .wrap {
-    max-width: 720px;
-    margin-inline: auto;
-    padding-inline: 20px;
-    padding-block: 36px 64px;
-  }
-
-  .masthead {
-    border-bottom: 2px solid var(--blue);
-    padding-bottom: 10px;
-  }
+  .wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
+  .col  { max-width: 64ch; }
 
   .eyebrow {
-    margin: 0;
-    font: 600 11px/1.4 var(--mono);
-    letter-spacing: .14em;
+    font-weight: 700;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  h1 {
-    font: 400 clamp(30px, 5vw, 44px)/1.15 var(--display);
-    text-wrap: balance;
-    color: var(--ink);
-    margin: 18px 0 0;
-  }
-
-  h2 {
-    font: 500 clamp(19px, 2.6vw, 22px)/1.3 var(--display);
-    letter-spacing: -.005em;
-    text-wrap: balance;
-    color: var(--ink);
+    color: var(--text-3);
     margin: 0;
   }
 
-  h3 {
-    font: 500 16px/1.35 var(--display);
-    color: var(--ink);
-    margin: 0;
-  }
-
-  p { margin: 0; max-width: 62ch; }
-
-  a { color: var(--blue); text-underline-offset: .18em; }
-  a:focus-visible, .book-btn:focus-visible {
-    outline: 2px solid var(--blue);
+  a { color: inherit; text-underline-offset: 0.18em; }
+  a:focus-visible, .btn:focus-visible {
+    outline: 2px solid var(--text-1);
     outline-offset: 3px;
     border-radius: 4px;
   }
+  strong { font-weight: 700; }
 
-  strong { font-weight: 600; color: var(--ink); }
+  /* hero */
+  .hero { padding-block: clamp(56px, 10vw, 120px) clamp(40px, 6vw, 72px); }
+  .hero h1 {
+    margin: 18px 0 0;
+    font-weight: 900;
+    font-size: clamp(2.6rem, 6.4vw, 5.6rem);
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+    max-width: 14ch;
+  }
+  .hero h1 .fifteen { font-variant-numeric: tabular-nums; }
+  .hero .lede { margin: 28px 0 0; font-size: 1.2rem; color: var(--text-2); max-width: 54ch; }
 
-  section {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-top: 40px;
+  /* the cream note, her one accent */
+  .note {
+    margin: 28px 0 0;
+    background: var(--note-bg);
+    color: var(--note-fg);
+    border: 1px solid var(--note-rule);
+    border-radius: var(--radius);
+    padding: 14px 18px;
+    font-weight: 700;
+    display: inline-block;
   }
 
-  .lede { display: flex; flex-direction: column; gap: 16px; margin-top: 22px; }
-  .lede p { font-size: 18px; }
-
-  .pledge {
-    font: 600 17px/1.5 var(--body);
-    color: var(--blue-ink);
-    background: var(--blue-soft);
-    border-radius: 8px;
-    padding: 12px 16px;
-    max-width: none;
+  section { padding-block: clamp(44px, 6vw, 76px); border-top: 1px solid var(--rule-soft); }
+  section h2 {
+    margin: 0 0 18px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    text-wrap: balance;
+    font-size: clamp(1.75rem, 2.6vw, 2.25rem);
   }
+  section p + p { margin-top: 14px; }
+  section p { margin: 0; color: var(--text-2); }
 
-  /* Call details: label and value rows, the way a quote is set out. */
-  dl.memo { margin: 2px 0 0; display: grid; grid-template-columns: 116px 1fr; }
-
-  dl.memo dt {
-    font: 600 11px/1.9 var(--mono);
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    padding: 11px 16px 11px 0;
-    border-top: 1px solid var(--hair);
-  }
-  dl.memo dd { margin: 0; padding: 10px 0; border-top: 1px solid var(--hair); }
-
-  /* The six questions really are asked in this order, so they are numbered. */
-  ol.asks { list-style: none; margin: 2px 0 0; padding: 0; }
-
+  /* the six questions, in the order they are asked */
+  ol.asks { list-style: none; margin: 22px 0 0; padding: 0; max-width: 70ch; }
   ol.asks li {
     display: grid;
-    grid-template-columns: 34px 1fr;
-    gap: 0 12px;
-    padding-block: 13px;
-    border-top: 1px solid var(--hair);
-    color: var(--ink);
+    grid-template-columns: 46px 1fr;
+    gap: 0 14px;
+    padding-block: 16px;
+    border-top: 1px solid var(--rule);
+    color: var(--text-1);
+    align-items: baseline;
   }
-
   ol.asks .n {
-    font: 600 13px/1.6 var(--mono);
-    color: var(--blue);
+    font-family: var(--font-num);
     font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    color: var(--text-3);
   }
 
-  .booking {
-    background: var(--surface);
-    border: 1px solid var(--hair);
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    align-items: flex-start;
+  /* call details */
+  dl.memo { margin: 22px 0 0; display: grid; grid-template-columns: 150px 1fr; max-width: 70ch; }
+  dl.memo dt {
+    font-weight: 700;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-3);
+    padding: 16px 18px 16px 0;
+    border-top: 1px solid var(--rule);
   }
+  dl.memo dd { margin: 0; padding: 14px 0; border-top: 1px solid var(--rule); color: var(--text-2); }
 
-  /* Paste the booking tool's inline snippet inside #booking-embed. */
+  /* booker */
+  .booker {
+    margin-top: 22px;
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: clamp(18px, 3vw, 28px);
+    max-width: 70ch;
+  }
   #booking-embed { width: 100%; }
-
-  .book-btn {
-    display: inline-block;
-    font: 600 16px/1 var(--body);
-    color: #FFFFFF;
-    background: var(--blue);
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    border: 1px solid var(--btn-bg);
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 11px 18px;
+    border-radius: 8px;
     text-decoration: none;
-    padding: 12px 24px;
-    border-radius: 4px;
-    border: 1px solid var(--blue);
+    transition: background 150ms var(--ease);
   }
-  .book-btn:hover { background: var(--blue-ink); border-color: var(--blue-ink); }
-
-  .fallback { font-size: 15px; color: var(--muted); }
-
+  .btn:hover { background: var(--btn-bg-hover); }
+  .btn:active { transform: translateY(1px); }
+  .fallback { margin-top: 16px; font-size: 15px; color: var(--text-3); }
   code {
-    font: 400 14px var(--mono);
-    color: var(--blue-ink);
-    background: var(--blue-soft);
-    padding: .14em .42em;
-    border-radius: 4px;
+    font-family: var(--font-num);
+    font-size: 0.95em;
+    background: var(--bg-muted);
+    color: var(--text-1);
+    padding: 0.14em 0.45em;
+    border-radius: 6px;
     user-select: all;
   }
 
+  /* team band, full bleed and inverted, the way her mockup sets it out */
+  .band {
+    background: var(--band-bg);
+    color: var(--band-fg);
+    border-top: 1px solid var(--band-rule);
+    padding-block: clamp(52px, 7vw, 88px);
+  }
+  .band h2 {
+    font-size: clamp(2rem, 3.6vw, 3rem);
+    color: var(--band-fg);
+    margin: 0 0 8px;
+  }
+  .band .eyebrow { color: var(--band-3); }
+  .band p { color: var(--band-2); margin: 0; max-width: 54ch; }
   ul.team {
     list-style: none;
-    margin: 2px 0 0;
+    margin: 30px 0 0;
     padding: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap: 0 24px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
   }
-  ul.team li { padding: 12px 0; border-top: 1px solid var(--hair); }
+  ul.team li {
+    background: var(--band-tile);
+    border: 1px solid var(--band-rule);
+    border-radius: var(--radius);
+    padding: 18px;
+  }
+  ul.team .who { font-weight: 700; font-size: 1.15rem; color: var(--band-fg); }
   ul.team .role {
     display: block;
-    font: 600 11px/1.7 var(--mono);
-    letter-spacing: .08em;
+    margin-top: 4px;
+    font-weight: 700;
+    font-size: 0.6875rem;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: var(--band-3);
   }
 
   footer {
-    margin-top: 44px;
-    border-top: 1px solid var(--hair);
-    padding-top: 22px;
+    padding-block: 34px 56px;
     font-size: 15px;
-    color: var(--muted);
+    color: var(--text-3);
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -256,9 +295,9 @@
   @media (max-width: 560px) {
     dl.memo { grid-template-columns: 1fr; }
     dl.memo dt { padding-bottom: 0; }
-    dl.memo dd { padding-top: 2px; border-top: 0; }
+    dl.memo dd { padding-top: 4px; border-top: 0; }
+    ol.asks li { grid-template-columns: 1fr; gap: 4px; }
   }
-
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
   }
@@ -266,24 +305,21 @@
 </head>
 <body>
 
-<div class="wrap">
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">University of Central Florida &middot; EGN 4641C</p>
+    <h1><span class="fifteen">15</span> minutes on how your events actually run</h1>
+    <p class="lede">
+      We are five engineering students at UCF, researching how people who run
+      events keep budgets and payments on track. Nothing to sell, we only want to
+      learn how it really works.
+    </p>
+    <p class="note">No demo and no sales follow up. This is research.</p>
+  </div>
+</header>
 
-  <header>
-    <div class="masthead">
-      <p class="eyebrow">University of Central Florida &middot; EGN 4641C</p>
-    </div>
-    <div class="lede">
-      <h1>15 minutes on how your events actually run</h1>
-      <p>
-        We are five engineering students at UCF, researching how people who run
-        events keep budgets and payments on track. Nothing to sell, we only want
-        to learn how it really works.
-      </p>
-      <p class="pledge">No demo and no sales follow up. This is research.</p>
-    </div>
-  </header>
-
-  <section>
+<section>
+  <div class="wrap col">
     <h2>Why a student is emailing you</h2>
     <p>
       EGN 4641C is UCF's engineering entrepreneurship course, taught by Dr. Heinrich.
@@ -295,9 +331,11 @@
       whether the problem is real, which is why you are getting a request for your
       time instead of a sales email.
     </p>
-  </section>
+  </div>
+</section>
 
-  <section>
+<section>
+  <div class="wrap col">
     <h2>What we are trying to learn</h2>
     <p>
       Our question is where the money side of an event breaks down. Budgets, cost
@@ -309,11 +347,13 @@
       go. We want the version with the messy parts left in. There are no right
       answers here, and in our experience the unglamorous answers are the useful ones.
     </p>
-  </section>
+  </div>
+</section>
 
-  <section>
+<section>
+  <div class="wrap">
     <h2>The six questions</h2>
-    <p>
+    <p class="col">
       This is the whole list, so you can see it before you agree to anything. We are
       hoping you will walk us through real examples rather than answer in the
       abstract. Happy to skip anything that does not apply.
@@ -326,9 +366,11 @@
       <li><span class="n">05</span><span>With several events running at once, how do you keep them straight?</span></li>
       <li><span class="n">06</span><span>Has a final number ever not matched what was expected? What happened?</span></li>
     </ol>
-  </section>
+  </div>
+</section>
 
-  <section>
+<section>
+  <div class="wrap">
     <h2>The call itself</h2>
     <dl class="memo">
       <dt>Length</dt>
@@ -342,42 +384,48 @@
       <dt>Afterwards</dt>
       <dd>Nothing. No demo, no follow up sequence, no mailing list.</dd>
     </dl>
-  </section>
+  </div>
+</section>
 
-  <section>
+<section>
+  <div class="wrap">
     <h2>Pick a time</h2>
-    <div class="booking">
+    <div class="booker">
       <div id="booking-embed">
-        <a class="book-btn" href="#" data-booking-link>Open the booking calendar</a>
+        <a class="btn" href="#" data-booking-link>Open the booking calendar</a>
       </div>
       <p class="fallback">
         Nothing on there suits you? Reply to the email, or write to
         <code>sr849057@ucf.edu</code> and we will work around your schedule.
       </p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <h2>Who you would be talking to</h2>
-    <p>Five students in the same course, splitting the interviews between us.</p>
+<section class="band">
+  <div class="wrap">
+    <p class="eyebrow">Who you would be talking to</p>
+    <h2>Five students, one course</h2>
+    <p>We split the interviews between us. Two of us join every call.</p>
     <ul class="team">
-      <li><h3>Medha</h3><span class="role">EGN 4641C</span></li>
-      <li><h3>Dee</h3><span class="role">Computer Science</span></li>
-      <li><h3>Beenish</h3><span class="role">EGN 4641C</span></li>
-      <li><h3>Julian</h3><span class="role">Computer Science</span></li>
-      <li><h3>Vardhan</h3><span class="role">MS Computer Science</span></li>
+      <li><span class="who">Medha</span><span class="role">EGN 4641C</span></li>
+      <li><span class="who">Dee</span><span class="role">Computer Science</span></li>
+      <li><span class="who">Beenish</span><span class="role">EGN 4641C</span></li>
+      <li><span class="who">Julian</span><span class="role">Computer Science</span></li>
+      <li><span class="who">Vardhan</span><span class="role">MS Computer Science</span></li>
     </ul>
-  </section>
+  </div>
+</section>
 
-  <footer>
+<footer>
+  <div class="wrap">
     <p>
       Settled is a student project for EGN 4641C, Engineering Entrepreneurship,
       at the University of Central Florida.
     </p>
     <p>Questions, or an easier way to reach you: <code>sr849057@ucf.edu</code></p>
-  </footer>
-
-</div>
+  </div>
+</footer>
 
 </body>
 </html>
