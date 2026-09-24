@@ -154,32 +154,83 @@
   }
   .more-row button:hover { color: var(--text-1); text-decoration-color: var(--text-3); }
 
+  /* Overlay: a centred panel on a laptop, a sheet off the bottom on a phone. */
   dialog {
-    max-width: 640px; width: calc(100% - 32px);
-    max-height: 82dvh; overflow: auto;
-    background: var(--bg-card); color: var(--text-1);
-    border: 1px solid var(--rule); border-radius: var(--radius);
-    padding: clamp(20px, 3vw, 32px);
+    margin: auto;
+    padding: 0;
+    width: min(640px, calc(100% - 32px));
+    max-height: min(82dvh, 720px);
+    background: var(--bg-card);
+    color: var(--text-1);
+    border: 1px solid var(--rule);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 24px 60px -12px rgba(0,0,0,.7);
   }
-  dialog::backdrop { background: rgba(0,0,0,.66); }
-  dialog h2 { margin: 0 0 14px; font-weight: 900; font-size: 1.35rem; letter-spacing: -0.03em; }
-  dialog p { margin: 0 0 12px; color: var(--text-2); }
-  .close {
-    margin-top: 8px; background: none; border: 1px solid var(--rule);
-    color: var(--text-1); font: inherit; font-weight: 700; font-size: 14px;
-    padding: 8px 16px; border-radius: 8px; cursor: pointer;
-  }
-  .close:hover { border-color: var(--text-3); }
+  dialog::backdrop { background: rgba(0,0,0,.74); backdrop-filter: blur(3px); }
 
-  ol.asks { list-style: none; margin: 0 0 4px; padding: 0; }
-  ol.asks li {
-    display: grid; grid-template-columns: 34px 1fr; gap: 0 12px;
-    padding-block: 12px; border-top: 1px solid var(--rule);
-    color: var(--text-1); align-items: baseline; font-size: 15px;
+  .d-head {
+    position: sticky; top: 0; z-index: 2;
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 22px 22px 16px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--rule);
   }
+  .d-head .t { min-width: 0; }
+  .d-head .eyebrow { margin-bottom: 6px; }
+  .d-head h2 {
+    margin: 0; font-weight: 900; letter-spacing: -0.03em; line-height: 1.12;
+    font-size: clamp(1.2rem, 1vw + 1rem, 1.55rem);
+  }
+  .x {
+    flex: none; margin-left: auto;
+    width: 34px; height: 34px; display: grid; place-items: center;
+    background: none; border: 1px solid var(--rule); border-radius: 50%;
+    color: var(--text-2); cursor: pointer; padding: 0;
+  }
+  .x:hover { background: var(--bg-muted); color: var(--text-1); border-color: var(--text-3); }
+  .x svg { width: 14px; height: 14px; }
+  .x svg path { stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+  .d-body { padding: 4px 22px 22px; overflow: auto; max-height: inherit; }
+  .d-body > p { margin: 16px 0 0; color: var(--text-2); font-size: 15px; }
+
+  /* the six questions, numbered because they are asked in this order */
+  ol.asks { list-style: none; margin: 8px 0 0; padding: 0; counter-reset: q; }
+  ol.asks li {
+    display: grid; grid-template-columns: 30px 1fr; gap: 0 14px;
+    padding-block: 14px; border-bottom: 1px solid var(--rule-soft);
+    align-items: start;
+  }
+  ol.asks li:last-child { border-bottom: 0; padding-bottom: 4px; }
   ol.asks .n {
     font-family: var(--font-num); font-variant-numeric: tabular-nums;
-    font-weight: 700; font-size: 0.6875rem; letter-spacing: 0.14em; color: var(--text-3);
+    font-weight: 700; font-size: 12px; color: var(--text-3);
+    background: var(--bg-muted); border-radius: 6px;
+    text-align: center; padding: 3px 0; margin-top: 1px;
+  }
+  ol.asks .q { font-size: 15.5px; line-height: 1.45; color: var(--text-1); }
+
+  /* the team, as names rather than a paragraph */
+  .names { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; padding: 0; list-style: none; }
+  .names li {
+    font-size: 13px; font-weight: 700; color: var(--text-2);
+    background: var(--bg-muted); border: 1px solid var(--rule);
+    border-radius: 999px; padding: 5px 12px;
+  }
+  .d-note {
+    margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--rule);
+    font-size: 13.5px; color: var(--text-3);
+  }
+
+  @media (max-width: 560px) {
+    dialog {
+      margin: auto auto 0; width: 100%;
+      max-width: none; max-height: 88dvh;
+      border-radius: 16px 16px 0 0; border-bottom: 0;
+    }
+    .d-head { padding: 18px 18px 14px; }
+    .d-body { padding: 4px 18px calc(22px + env(safe-area-inset-bottom, 0px)); }
   }
 
   footer {
@@ -224,7 +275,14 @@
     .btn svg { transition: transform 200ms var(--ease); }
     .btn:hover svg { transform: translateX(3px); }
     .btn { transition: background 160ms var(--ease); }
-    dialog[open] { animation: rise 260ms var(--ease) both; }
+    dialog[open] { animation: pop 240ms var(--ease) both; }
+    @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.985); } }
+    dialog[open]::backdrop { animation: fade 240ms var(--ease) both; }
+    @keyframes fade { from { opacity: 0; } }
+    @media (max-width: 560px) {
+      dialog[open] { animation: sheet 300ms var(--ease) both; }
+      @keyframes sheet { from { transform: translateY(18px); opacity: 0; } }
+    }
   }
 </style>
 </head>
@@ -274,44 +332,71 @@
   </div>
 </footer>
 
-<dialog id="q">
-  <h2>The six questions we will ask</h2>
-  <p>The whole list, so you can see it before agreeing to anything. Happy to skip
-     anything that does not apply.</p>
-  <ol class="asks">
-    <li><span class="n">01</span><span>Walk us through the last event you ran, from the first budget to the final numbers.</span></li>
-    <li><span class="n">02</span><span>Where do those numbers first live, and who else needs to see them?</span></li>
-    <li><span class="n">03</span><span>How do you track costs and approvals once the event is underway?</span></li>
-    <li><span class="n">04</span><span>What happens when a cost changes after the budget is set?</span></li>
-    <li><span class="n">05</span><span>With several events running at once, how do you keep them straight?</span></li>
-    <li><span class="n">06</span><span>Has a final number ever not matched what was expected? What happened?</span></li>
-  </ol>
-  <button class="close" type="button">Close</button>
+<dialog id="q" aria-labelledby="q-title">
+  <div class="d-head">
+    <div class="t">
+      <p class="eyebrow">15 minutes, six questions</p>
+      <h2 id="q-title">What we will ask</h2>
+    </div>
+    <button class="x" type="button" data-close aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+  </div>
+  <div class="d-body">
+    <p>The whole list, so you can see it before agreeing to anything. Happy to skip
+       anything that does not apply.</p>
+    <ol class="asks">
+      <li><span class="n">01</span><span class="q">Walk us through the last event you ran, from the first budget to the final numbers.</span></li>
+      <li><span class="n">02</span><span class="q">Where do those numbers first live, and who else needs to see them?</span></li>
+      <li><span class="n">03</span><span class="q">How do you track costs and approvals once the event is underway?</span></li>
+      <li><span class="n">04</span><span class="q">What happens when a cost changes after the budget is set?</span></li>
+      <li><span class="n">05</span><span class="q">With several events running at once, how do you keep them straight?</span></li>
+      <li><span class="n">06</span><span class="q">Has a final number ever not matched what was expected? What happened?</span></li>
+    </ol>
+    <p class="d-note">We will ask you to walk through one real event rather than
+       describe how it usually goes.</p>
+  </div>
 </dialog>
 
-<dialog id="why">
-  <h2>Why a student is emailing you</h2>
-  <p>EGN 4641C is UCF's engineering entrepreneurship course. The first half of the
-     semester is nothing but customer interviews, because before anyone is allowed
-     to build something they have to find out whether the problem is real.</p>
-  <p>So this is not a pitch dressed up as research. Talking to you is the assignment.</p>
-  <p>The team: Medha, Dee, Beenish, Julian and Vardhan. Two of us join every call.</p>
-  <button class="close" type="button">Close</button>
+<dialog id="why" aria-labelledby="why-title">
+  <div class="d-head">
+    <div class="t">
+      <p class="eyebrow">EGN 4641C &middot; University of Central Florida</p>
+      <h2 id="why-title">Why a student is emailing you</h2>
+    </div>
+    <button class="x" type="button" data-close aria-label="Close"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"/></svg></button>
+  </div>
+  <div class="d-body">
+    <p>EGN 4641C is UCF's engineering entrepreneurship course. The first half of the
+       semester is nothing but customer interviews, because before anyone is allowed
+       to build something they have to find out whether the problem is real.</p>
+    <p>So this is not a pitch dressed up as research. Talking to you is the assignment.</p>
+    <p class="d-note">The team, two of us on every call:</p>
+    <ul class="names">
+      <li>Medha</li><li>Dee</li><li>Beenish</li><li>Julian</li><li>Vardhan</li>
+    </ul>
+  </div>
 </dialog>
 
 <script>
   document.querySelectorAll("[data-open]").forEach(function (b) {
     b.addEventListener("click", function () {
       var d = document.getElementById(b.dataset.open);
-      if (d && d.showModal) { d.showModal(); }
+      if (!d || !d.showModal) return;
+      d.showModal();
+      var h = d.querySelector("h2");
+      if (h) { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
     });
   });
-  document.querySelectorAll("dialog .close").forEach(function (b) {
+  document.querySelectorAll("dialog [data-close]").forEach(function (b) {
     b.addEventListener("click", function () { b.closest("dialog").close(); });
   });
   /* Clicking the backdrop closes it, the way a dialog should behave. */
   document.querySelectorAll("dialog").forEach(function (d) {
-    d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
+    d.addEventListener("click", function (e) {
+      var r = d.getBoundingClientRect();
+      var inside = e.clientX >= r.left && e.clientX <= r.right &&
+                   e.clientY >= r.top  && e.clientY <= r.bottom;
+      if (!inside) d.close();
+    });
   });
 </script>
 
