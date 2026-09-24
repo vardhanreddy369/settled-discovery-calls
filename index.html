@@ -9,7 +9,9 @@
 <meta property="og:title" content="15 minutes on how your events actually run">
 <meta property="og:description" content="Five UCF engineering students researching how people who run events keep budgets and payments on track. Nothing to sell.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230A0A0A'/%3E%3Ctext x='16' y='22' font-family='Inter,sans-serif' font-weight='700' font-size='14' fill='%23FAFAFA' text-anchor='middle'%3E15%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230A0A0A'/%3E%3Ctext x='12' y='17.9' text-anchor='middle' transform='rotate(9 12 12)' font-family='Helvetica,Arial,sans-serif' font-weight='bold' font-size='15.5' fill='%23FAFAFA'%3E$%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="logo.png">
+<meta property="og:image" content="https://vardhanreddy369.github.io/settled-discovery-calls/logo.png">
 <title>Settled Discovery Calls</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -143,9 +145,8 @@
   }
   .mark { width: 26px; height: 26px; display: block; color: var(--text-1); flex: none; }
   .mark rect { fill: currentColor; }
-  .mark path { stroke: var(--bg-page); stroke-width: 2.4; fill: none;
-               stroke-linecap: round; stroke-linejoin: round;
-               stroke-dasharray: 22; stroke-dashoffset: 0; }
+  .mark text { fill: var(--bg-page); font-family: var(--font-sans);
+               font-weight: 900; font-size: 15.5px; letter-spacing: -0.02em; }
   .wordmark { font-weight: 900; font-size: 1.05rem; letter-spacing: -0.03em; color: var(--text-1); }
 
   /* button gets an arrow that leans forward on hover */
@@ -165,8 +166,9 @@
     .reveal:nth-child(5) { animation-delay: 320ms; }
     @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
 
-    .mark path { animation: draw 700ms var(--ease) 220ms both; }
-    @keyframes draw { from { stroke-dashoffset: 22; } to { stroke-dashoffset: 0; } }
+    .mark { animation: stamp 520ms var(--ease) 120ms both; }
+    @keyframes stamp { from { opacity: 0; transform: scale(.82) rotate(-6deg); } }
+    .mark text { animation: rise 520ms var(--ease) 300ms both; }
 
     .btn { transition: background 160ms var(--ease), transform 160ms var(--ease); }
     .btn svg { transition: transform 200ms var(--ease); }
@@ -374,9 +376,9 @@
 
 <div class="wrap">
   <div class="topbar">
-    <svg class="mark" viewBox="0 0 24 24" aria-hidden="true">
-      <rect x="1" y="1" width="22" height="22" rx="6.5"/>
-      <path d="M7 12.4l3.3 3.3L17.2 8.8"/>
+    <svg class="mark" viewBox="0 0 24 24" role="img" aria-label="Settled">
+      <rect x="0" y="0" width="24" height="24" rx="6"/>
+      <text x="12" y="17.9" text-anchor="middle" transform="rotate(9 12 12)">$</text>
     </svg>
     <span class="wordmark">Settled</span>
   </div>
