@@ -4,12 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Book a 15 minute customer discovery call with the Settled team, UCF EGN 4641C. No demo and no sales follow up.">
-<meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#0A0A0A">
 <meta property="og:title" content="15 minutes on how your events actually run">
 <meta property="og:description" content="Five UCF engineering students researching how people who run events keep budgets and payments on track. Nothing to sell.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230A0A0A'/%3E%3Ctext x='12' y='17.9' text-anchor='middle' transform='rotate(9 12 12)' font-family='Helvetica,Arial,sans-serif' font-weight='bold' font-size='15.5' fill='%23FAFAFA'%3E$%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23FAFAFA'/%3E%3Ctext x='12' y='17.9' text-anchor='middle' transform='rotate(9 12 12)' font-family='Helvetica,Arial,sans-serif' font-weight='bold' font-size='15.5' fill='%230A0A0A'%3E$%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="logo.png">
 <meta property="og:image" content="https://vardhanreddy369.github.io/settled-discovery-calls/logo.png">
 <title>Settled Discovery Calls</title>
@@ -20,62 +19,8 @@
 <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap">
 
 <style>
-  /* Medha's tokens, lifted verbatim from her mockup. */
+  /* Medha's dark tokens, used as the only theme: black page, white mark. */
   :root {
-    --bg-page:   #FFFFFF;
-    --bg-card:   #FAFAFA;
-    --bg-muted:  #F0F0F0;
-    --text-1:    #0A0A0A;
-    --text-2:    #242424;
-    --text-3:    #666666;
-    --rule:      #D9D9D9;
-    --rule-soft: #F0F0F0;
-    --btn-bg:    #0A0A0A;
-    --btn-fg:    #FAFAFA;
-    --btn-bg-hover: #000000;
-    --slot-bg:   #FFFFFF;
-    --band-bg:   #0A0A0A;
-    --band-fg:   #FAFAFA;
-    --band-2:    #C4C4C4;
-    --band-3:    #8A8A8A;
-    --band-rule: #242424;
-    --band-tile: #1C1C1C;
-    --note-bg:   #FFF7D6;
-    --note-fg:   #3D3200;
-    --note-rule: #E8D98A;
-
-    --font-sans: 'Satoshi', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-    --font-num:  'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
-    --ease:      cubic-bezier(0.16, 1, 0.3, 1);
-    --radius:    10px;
-    --gutter:    clamp(16px, 4vw, 48px);
-    --max:       1240px;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      color-scheme: dark;
-      --bg-page:   #0A0A0A;
-      --bg-card:   #121212;
-      --bg-muted:  #1C1C1C;
-      --text-1:    #FAFAFA;
-      --text-2:    #C4C4C4;
-      --text-3:    #8A8A8A;
-      --rule:      #242424;
-      --rule-soft: #171717;
-      --btn-bg:    #FAFAFA;
-      --btn-fg:    #0A0A0A;
-      --btn-bg-hover: #FFFFFF;
-      --slot-bg:   #0A0A0A;
-      --band-bg:   #121212;
-      --band-rule: #242424;
-      --band-tile: #1C1C1C;
-      --note-bg:   #2A2410;
-      --note-fg:   #F2E6B0;
-      --note-rule: #4A4020;
-    }
-  }
-  :root[data-theme="dark"] {
     color-scheme: dark;
     --bg-page:   #0A0A0A;
     --bg-card:   #121212;
@@ -90,11 +35,21 @@
     --btn-bg-hover: #FFFFFF;
     --slot-bg:   #0A0A0A;
     --band-bg:   #121212;
+    --band-fg:   #FAFAFA;
+    --band-2:    #C4C4C4;
+    --band-3:    #8A8A8A;
     --band-rule: #242424;
     --band-tile: #1C1C1C;
     --note-bg:   #2A2410;
     --note-fg:   #F2E6B0;
     --note-rule: #4A4020;
+
+    --font-sans: 'Satoshi', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-num:  'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --ease:      cubic-bezier(0.16, 1, 0.3, 1);
+    --radius:    10px;
+    --gutter:    clamp(16px, 4vw, 48px);
+    --max:       1240px;
   }
 
   html { -webkit-text-size-adjust: 100%; }
