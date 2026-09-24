@@ -134,6 +134,38 @@
   }
   strong { font-weight: 700; }
 
+
+  /* one screen: the ask, the promise, the button */
+  .hero { padding-block: clamp(48px, 8vw, 96px) clamp(36px, 5vw, 56px); }
+  .cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 30px; }
+  .facts {
+    margin: 26px 0 0; padding: 0; list-style: none;
+    display: flex; flex-wrap: wrap; gap: 8px 26px;
+    font-size: 15px; color: var(--text-3);
+  }
+  .facts li { display: flex; align-items: baseline; gap: 8px; }
+  .facts b { font-weight: 700; color: var(--text-2); }
+
+  details.more {
+    margin-top: 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  details.more > summary {
+    cursor: pointer; list-style: none;
+    padding-block: 22px;
+    font-weight: 700; font-size: 1.05rem; color: var(--text-1);
+    display: flex; align-items: center; gap: 10px;
+  }
+  details.more > summary::-webkit-details-marker { display: none; }
+  details.more > summary::after {
+    content: "+"; margin-left: auto;
+    font-family: var(--font-num); font-weight: 400; font-size: 1.3rem; color: var(--text-3);
+  }
+  details.more[open] > summary::after { content: "\2212"; }
+  details.more > summary:focus-visible { outline: 2px solid var(--text-1); outline-offset: 3px; }
+  details.more .inner { padding-bottom: 26px; }
+  details.more p { color: var(--text-2); margin: 0 0 14px; max-width: 64ch; }
+
   /* hero */
   .hero { padding-block: clamp(56px, 10vw, 120px) clamp(40px, 6vw, 72px); }
   .hero h1 {
@@ -310,120 +342,59 @@
     <p class="eyebrow">University of Central Florida &middot; EGN 4641C</p>
     <h1><span class="fifteen">15</span> minutes on how your events actually run</h1>
     <p class="lede">
-      We are five engineering students at UCF, researching how people who run
-      events keep budgets and payments on track. Nothing to sell, we only want to
-      learn how it really works.
+      We are five UCF engineering students. For one semester our whole assignment is
+      to talk to people who run events. Nothing to sell, we only want to learn.
     </p>
     <p class="note">No demo and no sales follow up. This is research.</p>
+
+    <div class="cta" id="booking-embed">
+      <a class="btn" href="#" data-booking-link>Pick a time</a>
+    </div>
+
+    <ul class="facts">
+      <li><b>15 min</b> 20 at the most</li>
+      <li><b>Video call</b> link sent when you book</li>
+      <li><b>Two of us</b> one asks, one takes notes</li>
+      <li><b>Afterwards</b> nothing at all</li>
+    </ul>
   </div>
 </header>
 
-<section>
-  <div class="wrap col">
-    <h2>Why a student is emailing you</h2>
-    <p>
-      EGN 4641C is UCF's engineering entrepreneurship course, taught by Dr. Heinrich.
-      It is engineering students being taught to build a business rather than a
-      product, and the first half of the semester is nothing but customer interviews.
-    </p>
-    <p>
-      We are not building or pitching anything this semester. Our job is to find out
-      whether the problem is real, which is why you are getting a request for your
-      time instead of a sales email.
-    </p>
-  </div>
-</section>
+<div class="wrap">
 
-<section>
-  <div class="wrap col">
-    <h2>What we are trying to learn</h2>
-    <p>
-      Our question is where the money side of an event breaks down. Budgets, cost
-      tracking and reporting usually sit in separate spreadsheets and documents, and
-      nothing checks that they still agree as the event changes.
-    </p>
-    <p>
-      Most of what gets written about running events describes how it is supposed to
-      go. We want the version with the messy parts left in. There are no right
-      answers here, and in our experience the unglamorous answers are the useful ones.
-    </p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>The six questions</h2>
-    <p class="col">
-      This is the whole list, so you can see it before you agree to anything. We are
-      hoping you will walk us through real examples rather than answer in the
-      abstract. Happy to skip anything that does not apply.
-    </p>
-    <ol class="asks">
-      <li><span class="n">01</span><span>Walk us through the last event you ran, from the first budget to the final numbers.</span></li>
-      <li><span class="n">02</span><span>Where do those numbers first live, and who else needs to see them?</span></li>
-      <li><span class="n">03</span><span>How do you track costs and approvals once the event is underway?</span></li>
-      <li><span class="n">04</span><span>What happens when a cost changes after the budget is set?</span></li>
-      <li><span class="n">05</span><span>With several events running at once, how do you keep them straight?</span></li>
-      <li><span class="n">06</span><span>Has a final number ever not matched what was expected? What happened?</span></li>
-    </ol>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>The call itself</h2>
-    <dl class="memo">
-      <dt>Length</dt>
-      <dd>15 to 20 minutes.</dd>
-      <dt>Where</dt>
-      <dd>A video call. The link is created when you book. A phone call works just as well if you would rather.</dd>
-      <dt>Who</dt>
-      <dd>Two of us. One asks the questions, one takes notes.</dd>
-      <dt>Recording</dt>
-      <dd>Only if you are happy for us to. We will ask at the start, and no is a perfectly good answer.</dd>
-      <dt>Afterwards</dt>
-      <dd>Nothing. No demo, no follow up sequence, no mailing list.</dd>
-    </dl>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Pick a time</h2>
-    <div class="booker">
-      <div id="booking-embed">
-        <a class="btn" href="#" data-booking-link>Open the booking calendar</a>
-      </div>
-      <p class="fallback">
-        Nothing on there suits you? Reply to the email, or write to
-        <code>sr849057@ucf.edu</code> and we will work around your schedule.
-      </p>
+  <details class="more">
+    <summary>The six questions we will ask</summary>
+    <div class="inner">
+      <p>The whole list, so you can see it before agreeing to anything. Happy to skip
+         anything that does not apply.</p>
+      <ol class="asks">
+        <li><span class="n">01</span><span>Walk us through the last event you ran, from the first budget to the final numbers.</span></li>
+        <li><span class="n">02</span><span>Where do those numbers first live, and who else needs to see them?</span></li>
+        <li><span class="n">03</span><span>How do you track costs and approvals once the event is underway?</span></li>
+        <li><span class="n">04</span><span>What happens when a cost changes after the budget is set?</span></li>
+        <li><span class="n">05</span><span>With several events running at once, how do you keep them straight?</span></li>
+        <li><span class="n">06</span><span>Has a final number ever not matched what was expected? What happened?</span></li>
+      </ol>
     </div>
-  </div>
-</section>
+  </details>
 
-<section class="band">
-  <div class="wrap">
-    <p class="eyebrow">Who you would be talking to</p>
-    <h2>Five students, one course</h2>
-    <p>We split the interviews between us. Two of us join every call.</p>
-    <ul class="team">
-      <li><span class="who">Medha</span><span class="role">EGN 4641C</span></li>
-      <li><span class="who">Dee</span><span class="role">Computer Science</span></li>
-      <li><span class="who">Beenish</span><span class="role">EGN 4641C</span></li>
-      <li><span class="who">Julian</span><span class="role">Computer Science</span></li>
-      <li><span class="who">Vardhan</span><span class="role">MS Computer Science</span></li>
-    </ul>
-  </div>
-</section>
+  <details class="more">
+    <summary>Why a student is emailing you</summary>
+    <div class="inner">
+      <p>EGN 4641C is UCF's engineering entrepreneurship course. The first half of the
+         semester is nothing but customer interviews, because before anyone is allowed
+         to build something they have to find out whether the problem is real.</p>
+      <p>So this is not a pitch dressed up as research. Talking to you is the assignment.</p>
+      <p>The team: Medha, Dee, Beenish, Julian and Vardhan. Two of us join every call.</p>
+    </div>
+  </details>
+
+</div>
 
 <footer>
   <div class="wrap">
-    <p>
-      Settled is a student project for EGN 4641C, Engineering Entrepreneurship,
-      at the University of Central Florida.
-    </p>
-    <p>Questions, or an easier way to reach you: <code>sr849057@ucf.edu</code></p>
+    <p>Settled &middot; EGN 4641C, University of Central Florida &middot;
+       <code>sr849057@ucf.edu</code></p>
   </div>
 </footer>
 
