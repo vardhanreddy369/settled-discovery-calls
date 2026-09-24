@@ -77,7 +77,7 @@
     overflow-x: hidden;
   }
 
-  .wrap { width: 100%; max-width: 980px; margin-inline: auto; padding-inline: var(--gutter); }
+  .wrap { width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
 
   .topbar { flex: none; display: flex; align-items: center; gap: 9px; padding-block: 16px 10px; }
   .mark { width: 26px; height: 26px; display: block; color: var(--text-1); flex: none; }
@@ -104,11 +104,11 @@
   h1 {
     margin: 10px 0 0;
     font-weight: 900;
-    font-size: clamp(2.2rem, 6vw, 5.3rem);
+    font-size: clamp(2.2rem, 5.5vw, 5rem);
     line-height: 0.98;
     letter-spacing: -0.035em;
     text-wrap: balance;
-    max-width: 14ch;
+    max-width: 24ch;
   }
   h1 .fifteen { font-variant-numeric: tabular-nums; }
 
