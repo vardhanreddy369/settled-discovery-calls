@@ -52,294 +52,183 @@
     --max:       1240px;
   }
 
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; height: 100%; }
   * { box-sizing: border-box; }
   img { max-width: 100%; }
   [hidden] { display: none !important; }
 
+  /* One screen: a full-height column, hero taking the slack in the middle. */
   body {
     margin: 0;
+    min-height: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
     background: var(--bg-page);
     color: var(--text-1);
     font-family: var(--font-sans);
-    font-size: 17px;
-    line-height: 1.55;
+    font-size: 16px;
+    line-height: 1.5;
     letter-spacing: -0.02em;
     font-weight: 450;
     -webkit-font-smoothing: antialiased;
     padding-top: env(safe-area-inset-top, 0px);
     padding-bottom: env(safe-area-inset-bottom, 0px);
+    overflow-x: hidden;
   }
 
-  .wrap { max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter); }
-  .col  { max-width: 64ch; }
+  .wrap { width: 100%; max-width: 980px; margin-inline: auto; padding-inline: var(--gutter); }
 
-  .eyebrow {
-    font-weight: 700;
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-3);
-    margin: 0;
-  }
-
-  a { color: inherit; text-underline-offset: 0.18em; }
-  a:focus-visible, .btn:focus-visible {
-    outline: 2px solid var(--text-1);
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-  strong { font-weight: 700; }
-
-
-
-  /* brand */
-  .topbar {
-    display: flex; align-items: center; gap: 10px;
-    padding-block: 20px;
-  }
+  .topbar { flex: none; display: flex; align-items: center; gap: 10px; padding-block: 18px; }
   .mark { width: 26px; height: 26px; display: block; color: var(--text-1); flex: none; }
   .mark rect { fill: currentColor; }
   .mark text { fill: var(--bg-page); font-family: var(--font-sans);
                font-weight: 900; font-size: 15.5px; letter-spacing: -0.02em; }
-  .wordmark { font-weight: 900; font-size: 1.05rem; letter-spacing: -0.03em; color: var(--text-1); }
+  .wordmark { font-weight: 900; font-size: 1.05rem; letter-spacing: -0.03em; }
 
-  /* button gets an arrow that leans forward on hover */
+  .hero {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: clamp(8px, 2vh, 28px);
+  }
+
+  .eyebrow {
+    margin: 0;
+    font-weight: 700; font-size: 0.6875rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-3);
+  }
+
+  h1 {
+    margin: 14px 0 0;
+    font-weight: 900;
+    font-size: clamp(1.9rem, 4.4vw + 0.5rem, 3.5rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+    max-width: 15ch;
+  }
+  h1 .fifteen { font-variant-numeric: tabular-nums; }
+
+  .lede {
+    margin: clamp(12px, 2vh, 20px) 0 0;
+    font-size: clamp(0.98rem, 0.4vw + 0.9rem, 1.15rem);
+    color: var(--text-2);
+    max-width: 52ch;
+  }
+
+  .cta { margin-top: clamp(16px, 2.6vh, 28px); display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+    background: var(--btn-bg); color: var(--btn-fg); border: 1px solid var(--btn-bg);
+    font-family: inherit; font-weight: 700; font-size: 15px;
+    padding: 11px 20px; border-radius: 8px; text-decoration: none;
+  }
+  .btn:hover { background: var(--btn-bg-hover); }
+  .btn:active { transform: translateY(1px); }
   .btn svg { width: 15px; height: 15px; }
   .btn svg path { stroke: currentColor; stroke-width: 2.2; fill: none;
                   stroke-linecap: round; stroke-linejoin: round; }
 
-  details.more > summary::after { transition: transform 200ms var(--ease); }
+  .facts {
+    margin: clamp(16px, 2.6vh, 28px) 0 0; padding: 0; list-style: none;
+    display: flex; flex-wrap: wrap; gap: 6px 26px;
+    font-size: 14px; color: var(--text-3);
+  }
+  .facts li { display: flex; align-items: baseline; gap: 7px; }
+  .facts b { font-weight: 700; color: var(--text-2); }
+
+  /* Depth lives in a dialog so the page itself never grows past one screen. */
+  .more-row { flex: none; display: flex; gap: 22px; flex-wrap: wrap; padding-block: 12px; }
+  .more-row button {
+    background: none; border: 0; padding: 0; cursor: pointer;
+    font: inherit; font-size: 14px; font-weight: 700; color: var(--text-2);
+    text-decoration: underline; text-underline-offset: 4px;
+    text-decoration-color: var(--rule);
+  }
+  .more-row button:hover { color: var(--text-1); text-decoration-color: var(--text-3); }
+
+  dialog {
+    max-width: 640px; width: calc(100% - 32px);
+    max-height: 82dvh; overflow: auto;
+    background: var(--bg-card); color: var(--text-1);
+    border: 1px solid var(--rule); border-radius: var(--radius);
+    padding: clamp(20px, 3vw, 32px);
+  }
+  dialog::backdrop { background: rgba(0,0,0,.66); }
+  dialog h2 { margin: 0 0 14px; font-weight: 900; font-size: 1.35rem; letter-spacing: -0.03em; }
+  dialog p { margin: 0 0 12px; color: var(--text-2); }
+  .close {
+    margin-top: 8px; background: none; border: 1px solid var(--rule);
+    color: var(--text-1); font: inherit; font-weight: 700; font-size: 14px;
+    padding: 8px 16px; border-radius: 8px; cursor: pointer;
+  }
+  .close:hover { border-color: var(--text-3); }
+
+  ol.asks { list-style: none; margin: 0 0 4px; padding: 0; }
+  ol.asks li {
+    display: grid; grid-template-columns: 34px 1fr; gap: 0 12px;
+    padding-block: 12px; border-top: 1px solid var(--rule);
+    color: var(--text-1); align-items: baseline; font-size: 15px;
+  }
+  ol.asks .n {
+    font-family: var(--font-num); font-variant-numeric: tabular-nums;
+    font-weight: 700; font-size: 0.6875rem; letter-spacing: 0.14em; color: var(--text-3);
+  }
+
+  footer { flex: none; padding-block: 12px 20px; font-size: 13px; color: var(--text-3); }
+  footer p { margin: 0; }
+  code {
+    font-family: var(--font-num); font-size: 0.95em;
+    background: var(--bg-muted); color: var(--text-2);
+    padding: 0.12em 0.42em; border-radius: 6px; user-select: all;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--text-1); outline-offset: 3px; border-radius: 4px;
+  }
+
+  @media (max-width: 560px) {
+    .facts { gap: 4px 18px; font-size: 13.5px; }
+    h1 { max-width: 100%; }
+  }
 
   /* Everything is visible at rest. Motion is added only where it is welcome. */
   @media (prefers-reduced-motion: no-preference) {
     .reveal { animation: rise 620ms var(--ease) both; }
-    .reveal:nth-child(1) { animation-delay: 40ms; }
-    .reveal:nth-child(2) { animation-delay: 110ms; }
-    .reveal:nth-child(3) { animation-delay: 180ms; }
-    .reveal:nth-child(4) { animation-delay: 250ms; }
-    .reveal:nth-child(5) { animation-delay: 320ms; }
+    .reveal:nth-of-type(1) { animation-delay: 40ms; }
+    .reveal:nth-of-type(2) { animation-delay: 110ms; }
+    .reveal:nth-of-type(3) { animation-delay: 180ms; }
     @keyframes rise { from { opacity: 0; transform: translateY(12px); } }
-
+    .cta { animation: rise 620ms var(--ease) 250ms both; }
+    .facts li { animation: rise 520ms var(--ease) both; }
+    .facts li:nth-child(1) { animation-delay: 330ms; }
+    .facts li:nth-child(2) { animation-delay: 390ms; }
+    .facts li:nth-child(3) { animation-delay: 450ms; }
+    .facts li:nth-child(4) { animation-delay: 510ms; }
     .mark { animation: stamp 520ms var(--ease) 120ms both; }
     @keyframes stamp { from { opacity: 0; transform: scale(.82) rotate(-6deg); } }
-    .mark text { animation: rise 520ms var(--ease) 300ms both; }
-
-    .btn { transition: background 160ms var(--ease), transform 160ms var(--ease); }
     .btn svg { transition: transform 200ms var(--ease); }
     .btn:hover svg { transform: translateX(3px); }
-
-    .facts li { animation: rise 520ms var(--ease) both; }
-    .facts li:nth-child(1) { animation-delay: 340ms; }
-    .facts li:nth-child(2) { animation-delay: 400ms; }
-    .facts li:nth-child(3) { animation-delay: 460ms; }
-    .facts li:nth-child(4) { animation-delay: 520ms; }
-
-    details.more[open] .inner { animation: rise 420ms var(--ease) both; }
-  }
-
-  /* one screen: the ask, the promise, the button */
-  .hero { padding-block: clamp(48px, 8vw, 96px) clamp(36px, 5vw, 56px); }
-  .cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 30px; }
-  .facts {
-    margin: 26px 0 0; padding: 0; list-style: none;
-    display: flex; flex-wrap: wrap; gap: 8px 26px;
-    font-size: 15px; color: var(--text-3);
-  }
-  .facts li { display: flex; align-items: baseline; gap: 8px; }
-  .facts b { font-weight: 700; color: var(--text-2); }
-
-  details.more {
-    margin-top: 0;
-    border-top: 1px solid var(--rule-soft);
-  }
-  details.more > summary {
-    cursor: pointer; list-style: none;
-    padding-block: 22px;
-    font-weight: 700; font-size: 1.05rem; color: var(--text-1);
-    display: flex; align-items: center; gap: 10px;
-  }
-  details.more > summary::-webkit-details-marker { display: none; }
-  details.more > summary::after {
-    content: "+"; margin-left: auto;
-    font-family: var(--font-num); font-weight: 400; font-size: 1.3rem; color: var(--text-3);
-  }
-  details.more[open] > summary::after { content: "\2212"; }
-  details.more > summary:focus-visible { outline: 2px solid var(--text-1); outline-offset: 3px; }
-  details.more .inner { padding-bottom: 26px; }
-  details.more p { color: var(--text-2); margin: 0 0 14px; max-width: 64ch; }
-
-  /* hero */
-  .hero { padding-block: clamp(56px, 10vw, 120px) clamp(40px, 6vw, 72px); }
-  .hero h1 {
-    margin: 18px 0 0;
-    font-weight: 900;
-    font-size: clamp(2.6rem, 6.4vw, 5.6rem);
-    line-height: 0.96;
-    letter-spacing: -0.035em;
-    text-wrap: balance;
-    max-width: 14ch;
-  }
-  .hero h1 .fifteen { font-variant-numeric: tabular-nums; }
-  .hero .lede { margin: 28px 0 0; font-size: 1.2rem; color: var(--text-2); max-width: 54ch; }
-
-
-  section { padding-block: clamp(44px, 6vw, 76px); border-top: 1px solid var(--rule-soft); }
-  section h2 {
-    margin: 0 0 18px;
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 1.05;
-    text-wrap: balance;
-    font-size: clamp(1.75rem, 2.6vw, 2.25rem);
-  }
-  section p + p { margin-top: 14px; }
-  section p { margin: 0; color: var(--text-2); }
-
-  /* the six questions, in the order they are asked */
-  ol.asks { list-style: none; margin: 22px 0 0; padding: 0; max-width: 70ch; }
-  ol.asks li {
-    display: grid;
-    grid-template-columns: 46px 1fr;
-    gap: 0 14px;
-    padding-block: 16px;
-    border-top: 1px solid var(--rule);
-    color: var(--text-1);
-    align-items: baseline;
-  }
-  ol.asks .n {
-    font-family: var(--font-num);
-    font-variant-numeric: tabular-nums;
-    font-weight: 700;
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    color: var(--text-3);
-  }
-
-  /* call details */
-  dl.memo { margin: 22px 0 0; display: grid; grid-template-columns: 150px 1fr; max-width: 70ch; }
-  dl.memo dt {
-    font-weight: 700;
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-3);
-    padding: 16px 18px 16px 0;
-    border-top: 1px solid var(--rule);
-  }
-  dl.memo dd { margin: 0; padding: 14px 0; border-top: 1px solid var(--rule); color: var(--text-2); }
-
-  /* booker */
-  .booker {
-    margin-top: 22px;
-    background: var(--bg-card);
-    border: 1px solid var(--rule);
-    border-radius: var(--radius);
-    padding: clamp(18px, 3vw, 28px);
-    max-width: 70ch;
-  }
-  #booking-embed { width: 100%; }
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-    background: var(--btn-bg);
-    color: var(--btn-fg);
-    border: 1px solid var(--btn-bg);
-    font-family: inherit;
-    font-weight: 700;
-    font-size: 15px;
-    padding: 11px 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    transition: background 150ms var(--ease);
-  }
-  .btn:hover { background: var(--btn-bg-hover); }
-  .btn:active { transform: translateY(1px); }
-  .fallback { margin-top: 16px; font-size: 15px; color: var(--text-3); }
-  code {
-    font-family: var(--font-num);
-    font-size: 0.95em;
-    background: var(--bg-muted);
-    color: var(--text-1);
-    padding: 0.14em 0.45em;
-    border-radius: 6px;
-    user-select: all;
-  }
-
-  /* team band, full bleed and inverted, the way her mockup sets it out */
-  .band {
-    background: var(--band-bg);
-    color: var(--band-fg);
-    border-top: 1px solid var(--band-rule);
-    padding-block: clamp(52px, 7vw, 88px);
-  }
-  .band h2 {
-    font-size: clamp(2rem, 3.6vw, 3rem);
-    color: var(--band-fg);
-    margin: 0 0 8px;
-  }
-  .band .eyebrow { color: var(--band-3); }
-  .band p { color: var(--band-2); margin: 0; max-width: 54ch; }
-  ul.team {
-    list-style: none;
-    margin: 30px 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
-  }
-  ul.team li {
-    background: var(--band-tile);
-    border: 1px solid var(--band-rule);
-    border-radius: var(--radius);
-    padding: 18px;
-  }
-  ul.team .who { font-weight: 700; font-size: 1.15rem; color: var(--band-fg); }
-  ul.team .role {
-    display: block;
-    margin-top: 4px;
-    font-weight: 700;
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--band-3);
-  }
-
-  footer {
-    padding-block: 34px 56px;
-    font-size: 15px;
-    color: var(--text-3);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  @media (max-width: 560px) {
-    dl.memo { grid-template-columns: 1fr; }
-    dl.memo dt { padding-bottom: 0; }
-    dl.memo dd { padding-top: 4px; border-top: 0; }
-    ol.asks li { grid-template-columns: 1fr; gap: 4px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
+    .btn { transition: background 160ms var(--ease); }
+    dialog[open] { animation: rise 260ms var(--ease) both; }
   }
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <div class="topbar">
-    <svg class="mark" viewBox="0 0 24 24" role="img" aria-label="Settled">
-      <rect x="0" y="0" width="24" height="24" rx="6"/>
-      <text x="12" y="17.9" text-anchor="middle" transform="rotate(9 12 12)">$</text>
-    </svg>
-    <span class="wordmark">Settled</span>
-  </div>
+<div class="wrap topbar">
+  <svg class="mark" viewBox="0 0 24 24" role="img" aria-label="Settled">
+    <rect x="0" y="0" width="24" height="24" rx="6"/>
+    <text x="12" y="17.9" text-anchor="middle" transform="rotate(9 12 12)">$</text>
+  </svg>
+  <span class="wordmark">Settled</span>
 </div>
 
-<header class="hero">
+<main class="hero">
   <div class="wrap">
     <p class="eyebrow reveal">University of Central Florida &middot; EGN 4641C</p>
     <h1 class="reveal"><span class="fifteen">15</span> minutes on how your events actually run</h1>
@@ -348,7 +237,7 @@
       to talk to people who run events. Nothing to sell, we only want to learn.
     </p>
 
-    <div class="cta reveal" id="booking-embed">
+    <div class="cta" id="booking-embed">
       <a class="btn" href="#" data-booking-link>Pick a time
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
       </a>
@@ -361,37 +250,11 @@
       <li><b>Afterwards</b> nothing at all</li>
     </ul>
   </div>
-</header>
+</main>
 
-<div class="wrap">
-
-  <details class="more">
-    <summary>The six questions we will ask</summary>
-    <div class="inner">
-      <p>The whole list, so you can see it before agreeing to anything. Happy to skip
-         anything that does not apply.</p>
-      <ol class="asks">
-        <li><span class="n">01</span><span>Walk us through the last event you ran, from the first budget to the final numbers.</span></li>
-        <li><span class="n">02</span><span>Where do those numbers first live, and who else needs to see them?</span></li>
-        <li><span class="n">03</span><span>How do you track costs and approvals once the event is underway?</span></li>
-        <li><span class="n">04</span><span>What happens when a cost changes after the budget is set?</span></li>
-        <li><span class="n">05</span><span>With several events running at once, how do you keep them straight?</span></li>
-        <li><span class="n">06</span><span>Has a final number ever not matched what was expected? What happened?</span></li>
-      </ol>
-    </div>
-  </details>
-
-  <details class="more">
-    <summary>Why a student is emailing you</summary>
-    <div class="inner">
-      <p>EGN 4641C is UCF's engineering entrepreneurship course. The first half of the
-         semester is nothing but customer interviews, because before anyone is allowed
-         to build something they have to find out whether the problem is real.</p>
-      <p>So this is not a pitch dressed up as research. Talking to you is the assignment.</p>
-      <p>The team: Medha, Dee, Beenish, Julian and Vardhan. Two of us join every call.</p>
-    </div>
-  </details>
-
+<div class="wrap more-row">
+  <button type="button" data-open="q">The six questions we will ask</button>
+  <button type="button" data-open="why">Why a student is emailing you</button>
 </div>
 
 <footer>
@@ -400,6 +263,47 @@
        <code>sr849057@ucf.edu</code></p>
   </div>
 </footer>
+
+<dialog id="q">
+  <h2>The six questions we will ask</h2>
+  <p>The whole list, so you can see it before agreeing to anything. Happy to skip
+     anything that does not apply.</p>
+  <ol class="asks">
+    <li><span class="n">01</span><span>Walk us through the last event you ran, from the first budget to the final numbers.</span></li>
+    <li><span class="n">02</span><span>Where do those numbers first live, and who else needs to see them?</span></li>
+    <li><span class="n">03</span><span>How do you track costs and approvals once the event is underway?</span></li>
+    <li><span class="n">04</span><span>What happens when a cost changes after the budget is set?</span></li>
+    <li><span class="n">05</span><span>With several events running at once, how do you keep them straight?</span></li>
+    <li><span class="n">06</span><span>Has a final number ever not matched what was expected? What happened?</span></li>
+  </ol>
+  <button class="close" type="button">Close</button>
+</dialog>
+
+<dialog id="why">
+  <h2>Why a student is emailing you</h2>
+  <p>EGN 4641C is UCF's engineering entrepreneurship course. The first half of the
+     semester is nothing but customer interviews, because before anyone is allowed
+     to build something they have to find out whether the problem is real.</p>
+  <p>So this is not a pitch dressed up as research. Talking to you is the assignment.</p>
+  <p>The team: Medha, Dee, Beenish, Julian and Vardhan. Two of us join every call.</p>
+  <button class="close" type="button">Close</button>
+</dialog>
+
+<script>
+  document.querySelectorAll("[data-open]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var d = document.getElementById(b.dataset.open);
+      if (d && d.showModal) { d.showModal(); }
+    });
+  });
+  document.querySelectorAll("dialog .close").forEach(function (b) {
+    b.addEventListener("click", function () { b.closest("dialog").close(); });
+  });
+  /* Clicking the backdrop closes it, the way a dialog should behave. */
+  document.querySelectorAll("dialog").forEach(function (d) {
+    d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
+  });
+</script>
 
 </body>
 </html>
