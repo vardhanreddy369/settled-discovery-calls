@@ -1,0 +1,361 @@
+<title>Settled Discovery Calls</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap">
+
+<style>
+  /* Google's own palette, so the page sits beside Calendar without arguing. */
+  :root {
+    --ground:    #FFFFFF;
+    --surface:   #FFFFFF;
+    --sunk:      #F1F3F4;
+    --ink:       #202124;
+    --body-c:    #3C4043;
+    --muted:     #5F6368;
+    --hair:      #DADCE0;
+    --hair-soft: #E8EAED;
+    --blue:      #1A73E8;
+    --blue-soft: #E8F0FE;
+    --blue-ink:  #174EA6;
+    --basil:     #0B8043;
+
+    --display: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --body:    "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono:    "Roboto Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --ground:    #1B1B1B;
+      --surface:   #2D2E30;
+      --sunk:      #3C4043;
+      --ink:       #E8EAED;
+      --body-c:    #BDC1C6;
+      --muted:     #9AA0A6;
+      --hair:      #5F6368;
+      --hair-soft: #3C4043;
+      --blue:      #8AB4F8;
+      --blue-soft: #1F3047;
+      --blue-ink:  #AECBFA;
+      --basil:     #81C995;
+
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --ground:    #1B1B1B;
+    --surface:   #2D2E30;
+    --sunk:      #3C4043;
+    --ink:       #E8EAED;
+    --body-c:    #BDC1C6;
+    --muted:     #9AA0A6;
+    --hair:      #5F6368;
+    --hair-soft: #3C4043;
+    --blue:      #8AB4F8;
+    --blue-soft: #1F3047;
+    --blue-ink:  #AECBFA;
+    --basil:     #81C995;
+
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--body-c);
+    font: 400 16px/1.6 var(--body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin-inline: auto;
+    padding-inline: 20px;
+    padding-block: 36px 64px;
+  }
+
+  .masthead {
+    border-bottom: 2px solid var(--blue);
+    padding-bottom: 10px;
+  }
+
+  .eyebrow {
+    margin: 0;
+    font: 600 11px/1.4 var(--mono);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  h1 {
+    font: 400 clamp(30px, 5vw, 44px)/1.15 var(--display);
+    text-wrap: balance;
+    color: var(--ink);
+    margin: 18px 0 0;
+  }
+
+  h2 {
+    font: 500 clamp(19px, 2.6vw, 22px)/1.3 var(--display);
+    letter-spacing: -.005em;
+    text-wrap: balance;
+    color: var(--ink);
+    margin: 0;
+  }
+
+  h3 {
+    font: 500 16px/1.35 var(--display);
+    color: var(--ink);
+    margin: 0;
+  }
+
+  p { margin: 0; max-width: 62ch; }
+
+  a { color: var(--blue); text-underline-offset: .18em; }
+  a:focus-visible, .book-btn:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  strong { font-weight: 600; color: var(--ink); }
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 40px;
+  }
+
+  .lede { display: flex; flex-direction: column; gap: 16px; margin-top: 22px; }
+  .lede p { font-size: 18px; }
+
+  .pledge {
+    font: 600 17px/1.5 var(--body);
+    color: var(--blue-ink);
+    background: var(--blue-soft);
+    border-radius: 8px;
+    padding: 12px 16px;
+    max-width: none;
+  }
+
+  /* Call details: label and value rows, the way a quote is set out. */
+  dl.memo { margin: 2px 0 0; display: grid; grid-template-columns: 116px 1fr; }
+
+  dl.memo dt {
+    font: 600 11px/1.9 var(--mono);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 11px 16px 11px 0;
+    border-top: 1px solid var(--hair);
+  }
+  dl.memo dd { margin: 0; padding: 10px 0; border-top: 1px solid var(--hair); }
+
+  /* The six questions really are asked in this order, so they are numbered. */
+  ol.asks { list-style: none; margin: 2px 0 0; padding: 0; }
+
+  ol.asks li {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 0 12px;
+    padding-block: 13px;
+    border-top: 1px solid var(--hair);
+    color: var(--ink);
+  }
+
+  ol.asks .n {
+    font: 600 13px/1.6 var(--mono);
+    color: var(--blue);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .booking {
+    background: var(--surface);
+    border: 1px solid var(--hair);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  /* Paste the booking tool's inline snippet inside #booking-embed. */
+  #booking-embed { width: 100%; }
+
+  .book-btn {
+    display: inline-block;
+    font: 600 16px/1 var(--body);
+    color: #FFFFFF;
+    background: var(--blue);
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    border: 1px solid var(--blue);
+  }
+  .book-btn:hover { background: var(--blue-ink); border-color: var(--blue-ink); }
+
+  .fallback { font-size: 15px; color: var(--muted); }
+
+  code {
+    font: 400 14px var(--mono);
+    color: var(--blue-ink);
+    background: var(--blue-soft);
+    padding: .14em .42em;
+    border-radius: 4px;
+    user-select: all;
+  }
+
+  ul.team {
+    list-style: none;
+    margin: 2px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 0 24px;
+  }
+  ul.team li { padding: 12px 0; border-top: 1px solid var(--hair); }
+  ul.team .role {
+    display: block;
+    font: 600 11px/1.7 var(--mono);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  footer {
+    margin-top: 44px;
+    border-top: 1px solid var(--hair);
+    padding-top: 22px;
+    font-size: 15px;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  @media (max-width: 560px) {
+    dl.memo { grid-template-columns: 1fr; }
+    dl.memo dt { padding-bottom: 0; }
+    dl.memo dd { padding-top: 2px; border-top: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header>
+    <div class="masthead">
+      <p class="eyebrow">University of Central Florida &middot; EGN 4641C</p>
+    </div>
+    <div class="lede">
+      <h1>15 minutes on how your events actually run</h1>
+      <p>
+        We are five engineering students at UCF, researching how people who run
+        events keep budgets and payments on track. Nothing to sell, we only want
+        to learn how it really works.
+      </p>
+      <p class="pledge">No demo and no sales follow up. This is research.</p>
+    </div>
+  </header>
+
+  <section>
+    <h2>Why a student is emailing you</h2>
+    <p>
+      EGN 4641C is UCF's engineering entrepreneurship course, taught by Dr. Heinrich.
+      It is engineering students being taught to build a business rather than a
+      product, and the first half of the semester is nothing but customer interviews.
+    </p>
+    <p>
+      We are not building or pitching anything this semester. Our job is to find out
+      whether the problem is real, which is why you are getting a request for your
+      time instead of a sales email.
+    </p>
+  </section>
+
+  <section>
+    <h2>What we are trying to learn</h2>
+    <p>
+      Our question is where the money side of an event breaks down. Budgets, cost
+      tracking and reporting usually sit in separate spreadsheets and documents, and
+      nothing checks that they still agree as the event changes.
+    </p>
+    <p>
+      Most of what gets written about running events describes how it is supposed to
+      go. We want the version with the messy parts left in. There are no right
+      answers here, and in our experience the unglamorous answers are the useful ones.
+    </p>
+  </section>
+
+  <section>
+    <h2>The six questions</h2>
+    <p>
+      This is the whole list, so you can see it before you agree to anything. We are
+      hoping you will walk us through real examples rather than answer in the
+      abstract. Happy to skip anything that does not apply.
+    </p>
+    <ol class="asks">
+      <li><span class="n">01</span><span>Walk us through the last event you ran, from the first budget to the final numbers.</span></li>
+      <li><span class="n">02</span><span>Where do those numbers first live, and who else needs to see them?</span></li>
+      <li><span class="n">03</span><span>How do you track costs and approvals once the event is underway?</span></li>
+      <li><span class="n">04</span><span>What happens when a cost changes after the budget is set?</span></li>
+      <li><span class="n">05</span><span>With several events running at once, how do you keep them straight?</span></li>
+      <li><span class="n">06</span><span>Has a final number ever not matched what was expected? What happened?</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>The call itself</h2>
+    <dl class="memo">
+      <dt>Length</dt>
+      <dd>15 to 20 minutes.</dd>
+      <dt>Where</dt>
+      <dd>A video call. The link is created when you book. A phone call works just as well if you would rather.</dd>
+      <dt>Who</dt>
+      <dd>Two of us. One asks the questions, one takes notes.</dd>
+      <dt>Recording</dt>
+      <dd>Only if you are happy for us to. We will ask at the start, and no is a perfectly good answer.</dd>
+      <dt>Afterwards</dt>
+      <dd>Nothing. No demo, no follow up sequence, no mailing list.</dd>
+    </dl>
+  </section>
+
+  <section>
+    <h2>Pick a time</h2>
+    <div class="booking">
+      <div id="booking-embed">
+        <a class="book-btn" href="#" data-booking-link>Open the booking calendar</a>
+      </div>
+      <p class="fallback">
+        Nothing on there suits you? Reply to the email, or write to
+        <code>sr849057@ucf.edu</code> and we will work around your schedule.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Who you would be talking to</h2>
+    <p>Five students in the same course, splitting the interviews between us.</p>
+    <ul class="team">
+      <li><h3>Medha</h3><span class="role">EGN 4641C</span></li>
+      <li><h3>Dee</h3><span class="role">Computer Science</span></li>
+      <li><h3>Beenish</h3><span class="role">EGN 4641C</span></li>
+      <li><h3>Julian</h3><span class="role">Computer Science</span></li>
+      <li><h3>Vardhan</h3><span class="role">MS Computer Science</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>
+      Settled is a student project for EGN 4641C, Engineering Entrepreneurship,
+      at the University of Central Florida.
+    </p>
+    <p>Questions, or an easier way to reach you: <code>sr849057@ucf.edu</code></p>
+  </footer>
+
+</div>
